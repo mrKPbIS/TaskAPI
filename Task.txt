@@ -1,0 +1,5 @@
+- https://hacker-news.firebaseio.com/v0/topstories.json для получения id топ500 историй
+- ответ списком id
+- https://hacker-news.firebaseio.com/v0/item/{$id}.json для получения данных истории
+- в ответе есть title
+
