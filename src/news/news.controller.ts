@@ -23,6 +23,11 @@ export class NewsController {
         return this.newsService.getItem(id);
     }
 
+    @Get('title')
+    getTitle() {
+        return this.newsService.getRandomTitle();
+    }
+
     @Get()
     findAll() {
         return this.newsService.findAll();
