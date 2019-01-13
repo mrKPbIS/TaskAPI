@@ -1,6 +1,7 @@
 import { Injectable, HttpService } from '@nestjs/common';
 import { News } from './interfaces/news.interface';
-import {Observable} from 'rxjs';
+import { Response } from './interfaces/response.interface'
+import { StoryItem } from './interfaces/storyItem.interface'
 
 @Injectable()
 export class NewsService {
@@ -15,14 +16,22 @@ export class NewsService {
     return this.collection.length - 1;
   }
 
-  async getTopList() {
-    let { data } = await this.httpService.get('https://hacker-news.firebaseio.com/v0/topstories.json').toPromise();
+  async getTopList(): Promise<any> {
+    const { data } = await this.httpService.get<Response>('https://hacker-news.firebaseio.com/v0/topstories.json').toPromise();
     return data;
   }
 
-  async getItem(id: Number) {
-    let { data } = await this.httpService.get(`https://hacker-news.firebaseio.com/v0/${id}.json`).toPromise();
+  async getItem(id: Number): Promise<any> {
+    let { data } = await this.httpService.get<Response>(`https://hacker-news.firebaseio.com/v0/item/${id}.json`).toPromise();
     return data;
+  }
+
+  async getRandomTitle() {
+    const list: Number[] = await this.getTopList();
+    const len = list.length;
+    const index = Math.ceil(Math.random() * len);
+    const item: StoryItem = await this.getItem(list[index]);
+    return item.title;
   }
 
   findAll(): News[] {
