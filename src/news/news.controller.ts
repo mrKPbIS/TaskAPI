@@ -18,7 +18,7 @@ export class NewsController {
         return this.newsService.getTopList();
     }
 
-    @Get('list')
+    @Get('list/:id')
     getItem(@Param('id') id) {
         return this.newsService.getItem(id);
     }
