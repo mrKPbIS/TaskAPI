@@ -1,14 +1,9 @@
-import { Module, HttpModule } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { Module } from '@nestjs/common';
 import { NewsModule } from './news/news.module';
 
 @Module({
-  imports: [HttpModule.register({
-    timeout: 5000,
-    maxRedirects: 5,
-  }), NewsModule],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [NewsModule],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}
