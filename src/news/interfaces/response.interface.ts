@@ -1,5 +1,5 @@
-import { StoryItem } from './storyItem.interface'
+import { StoryItem } from './storyItem.interface';
 
 export class Response {
-    data: Number[] | StoryItem
+  data: Number[] | StoryItem;
 }

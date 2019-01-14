@@ -10,13 +10,14 @@ describe('News Controller', () => {
     module = await Test.createTestingModule({
       imports: [HttpModule],
       controllers: [NewsController],
-      providers: [NewsService]
+      providers: [NewsService],
     }).compile();
   });
 
-
   it('should be defined', () => {
-    const controller: NewsController = module.get<NewsController>(NewsController);
+    const controller: NewsController = module.get<NewsController>(
+      NewsController,
+    );
     expect(controller).toBeDefined();
   });
 });

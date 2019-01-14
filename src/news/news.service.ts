@@ -1,6 +1,6 @@
 import { Injectable, HttpService } from '@nestjs/common';
-import { Response } from './interfaces/response.interface'
-import { StoryItem } from './interfaces/storyItem.interface'
+import { Response } from './interfaces/response.interface';
+import { StoryItem } from './interfaces/storyItem.interface';
 
 @Injectable()
 export class NewsService {
@@ -11,20 +11,27 @@ export class NewsService {
   }
 
   async getTopList(): Promise<any> {
-    const { data } = await this.httpService.get<Response>(`${this.apiAddress}/topstories.json`).toPromise();
+    const { data } = await this.httpService
+      .get<Response>(`${this.apiAddress}/topstories.json`)
+      .toPromise();
     return data;
   }
 
   async getItem(id: Number): Promise<any> {
-    let { data } = await this.httpService.get<Response>(`${this.apiAddress}/item/${id}.json`).toPromise();
+    let { data } = await this.httpService
+      .get<Response>(`${this.apiAddress}/item/${id}.json`)
+      .toPromise();
     return data;
   }
 
   async getRandomTitle() {
     const list: Number[] = await this.getTopList();
     const len = list.length;
+    if (!len) {
+      return '';
+    }
     const index = Math.ceil(Math.random() * len);
     const item: StoryItem = await this.getItem(list[index]);
-    return item.title;
+    return 'title' in item ? item.title : '';
   }
 }
