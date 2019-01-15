@@ -30,7 +30,7 @@ export class NewsService {
     if (!len) {
       return '';
     }
-    const index = Math.ceil(Math.random() * len);
+    const index = Math.floor(Math.random() * len);
     const item: StoryItem = await this.getItem(list[index]);
     return 'title' in item ? item.title : '';
   }
