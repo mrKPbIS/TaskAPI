@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { NewsController } from './news.controller';
 import { NewsService } from './news.service';
-import { HttpModule } from '@nestjs/common';
+import { HttpModule, HttpService } from '@nestjs/common';
 
 describe('News Controller', () => {
   let module: TestingModule;
@@ -19,5 +19,22 @@ describe('News Controller', () => {
       NewsController,
     );
     expect(controller).toBeDefined();
+  });
+
+  it('title', async () => {
+    const service: NewsService = module.get<NewsService>(NewsService);
+    const controller: NewsController = module.get<NewsController>(
+      NewsController
+    );
+    const topList: Number[] = [0];
+    const items = [
+      {
+        title: 'first',
+      },
+    ];
+    jest.spyOn(service, 'getTopList').mockImplementation(() => topList);
+    jest.spyOn(service, 'getItem').mockImplementation((id) => items[id]);
+    expect.assertions(1);
+    return await expect(controller.getTitle()).resolves.toBe('first');
   });
 });

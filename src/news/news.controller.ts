@@ -1,11 +1,6 @@
 import {
   Controller,
   Get,
-  Post,
-  Body,
-  Param,
-  UsePipes,
-  ValidationPipe,
 } from '@nestjs/common';
 import { NewsService } from './news.service';
 
